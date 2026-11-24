@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aguiyi John Obichukwu | STEM & Robotics Facilitator • Software & AI Developer</title>
+  <meta name="description" content="Portfolio of Aguiyi John Obichukwu — STEM & Robotics Facilitator, Software & AI Developer, Technical Trainer, and QA Evaluator based in Abuja, Nigeria." />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              emerald: '#10b981',
+              teal: '#14b8a6',
+              sky: '#0ea5e9',
+              slateDark: '#0b1120',
+              cardDark: '#111827',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom subtle grid background & print styles */
+    .bg-grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    }
+    .dark .bg-grid-pattern {
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .print-clean { box-shadow: none !important; border: 1px solid #e2e8f0 !important; background: #ffffff !important; color: #0f172a !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-brand-slateDark dark:text-slate-100 font-sans antialiased transition-colors duration-300 bg-grid-pattern selection:bg-emerald-500/30 selection:text-emerald-200">
+
+  <!-- Toast Notification Banner (Replaces alert()) -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none no-print">
+    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900 dark:bg-emerald-950/90 text-white border border-emerald-500/40 shadow-xl backdrop-blur-md">
+      <i class="fa-solid fa-circle-check text-emerald-400"></i>
+      <span id="toast-message" class="text-sm font-medium">Copied to clipboard!</span>
+    </div>
+  </div>
+
+  <!-- Sticky Navigation Bar -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-brand-slateDark/85 border-b border-slate-200/80 dark:border-slate-800/80 no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Brand Logo / Monogram -->
+      <a href="#top" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-sky-600 flex items-center justify-center text-white font-mono font-bold text-sm shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+          AJ
+        </div>
+        <div class="flex flex-col">
+          <span class="font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white">Aguiyi John O.</span>
+          <span class="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 hidden sm:inline">jhonniee.github.io</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#experience" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Experience</a>
+        <a href="#projects" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Projects</a>
+        <a href="#skills" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Skills</a>
+        <a href="#education" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Education</a>
+        <a href="#contact" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button onclick="window.print()" title="Print or Save Resume PDF" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors">
+          <i class="fa-solid fa-file-arrow-down text-emerald-500"></i>
+          <span>Resume PDF</span>
+        </button>
+
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" aria-label="Toggle dark or light theme" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/90 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-300 border border-slate-200 dark:border-slate-700 transition-colors">
+          <i id="theme-icon" class="fa-solid fa-sun text-sm"></i>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" aria-label="Open navigation menu" class="md:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
+          <i class="fa-solid fa-bars text-sm"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-brand-slateDark px-4 py-4 space-y-2">
+      <a href="#experience" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Experience & Impact</a>
+      <a href="#projects" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Featured Projects</a>
+      <a href="#skills" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Skills & Stack</a>
+      <a href="#education" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Education & Certifications</a>
+      <a href="#contact" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Contact & Share</a>
+    </div>
+  </header>
+
+  <main id="top" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-20 sm:space-y-24">
+
+    <!-- 1. HERO SECTION -->
+    <section class="relative pt-2 sm:pt-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <!-- Left Content -->
+        <div class="lg:col-span-8 space-y-6">
+          <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Abuja, Nigeria • Available for Software, EdTech &amp; LMS Training Roles</span>
+          </div>
+
+          <div class="space-y-3">
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+              Aguiyi John Obichukwu
+            </h1>
+            <p class="text-lg sm:text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-400 to-sky-500">
+              STEM &amp; Robotics Facilitator | Software &amp; AI Developer | Technical Trainer &amp; QA Evaluator
+            </p>
+          </div>
+
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+            Computer Science Education graduate bridging hands-on software and AI development with structured technical facilitation, LMS onboarding, and quality assurance. Experienced in building Python &amp; web applications, evaluating AI models at 98% annotation accuracy, and designing step-by-step robotics and digital literacy curricula.
+          </p>
+
+          <!-- Primary CTA Buttons -->
+          <div class="flex flex-wrap items-center gap-3 pt-1 no-print">
+            <a href="#projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20 transition-all">
+              <i class="fa-solid fa-code"></i>
+              <span>View Projects</span>
+            </a>
+
+            <button onclick="copyText('Aguiyi John Obichukwu | Email: johnobichukwu19@gmail.com | Phone: +234 901 509 2514 | GitHub: https://github.com/Jhonniee | LinkedIn: https://www.linkedin.com/in/john-aguiyi-72897a240', 'Full contact details copied!')" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-white dark:bg-slate-800/90 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700 transition-all">
+              <i class="fa-regular fa-copy text-emerald-500"></i>
+              <span>Copy Contact Info</span>
+            </button>
+
+            <a href="https://github.com/Jhonniee" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium bg-slate-900 dark:bg-slate-800/60 hover:bg-slate-800 dark:hover:bg-slate-700 text-white border border-slate-700 transition-all">
+              <i class="fa-brands fa-github text-base"></i>
+              <span>GitHub</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/john-aguiyi-72897a240" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium bg-sky-600/10 hover:bg-sky-600/20 text-sky-700 dark:text-sky-300 border border-sky-500/30 transition-all">
+              <i class="fa-brands fa-linkedin text-base"></i>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Quick-Stats / Contact Card -->
+        <div class="lg:col-span-4">
+          <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 shadow-xl shadow-slate-200/40 dark:shadow-black/30 space-y-5 print-clean">
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+              <div>
+                <p class="text-xs font-mono uppercase tracking-wider text-slate-400">Direct Reach</p>
+                <h2 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">Quick Credentials</h2>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                B.Sc. (Ed.) CS
+              </span>
+            </div>
+
+            <!-- Interactive Contact Items -->
+            <div class="space-y-3 text-sm">
+              <div class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-800">
+                <div class="flex items-center gap-2.5 truncate">
+                  <i class="fa-solid fa-envelope text-emerald-500 w-4 text-center"></i>
+                  <span class="truncate font-mono text-xs sm:text-sm">johnobichukwu19@gmail.com</span>
+                </div>
+                <button onclick="copyText('johnobichukwu19@gmail.com', 'Email address copied!')" title="Copy Email" class="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors no-print">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+              </div>
+
+              <div class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-800">
+                <div class="flex items-center gap-2.5">
+                  <i class="fa-solid fa-phone text-sky-500 w-4 text-center"></i>
+                  <span class="font-mono text-xs sm:text-sm">+234 901 509 2514</span>
+                </div>
+                <button onclick="copyText('+234 901 509 2514', 'Phone number copied!')" title="Copy Phone" class="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors no-print">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+              </div>
+
+              <div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-800">
+                <i class="fa-solid fa-location-dot text-rose-500 w-4 text-center"></i>
+                <span class="text-slate-700 dark:text-slate-300">Abuja, Federal Capital Territory, Nigeria</span>
+              </div>
+            </div>
+
+            <!-- Key Metrics Grid -->
+            <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+              <div class="p-2.5 rounded-xl bg-emerald-500/5 border border-emerald-500/15">
+                <div class="text-lg font-extrabold text-emerald-600 dark:text-emerald-400">98%</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 leading-tight mt-0.5">QA Annotation Accuracy</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-sky-500/5 border border-sky-500/15">
+                <div class="text-lg font-extrabold text-sky-600 dark:text-sky-400">3,000+</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 leading-tight mt-0.5">Data Points Evaluated</div>
+              </div>
+              <div class="p-2.5 rounded-xl bg-teal-500/5 border border-teal-500/15">
+                <div class="text-lg font-extrabold text-teal-600 dark:text-teal-400">8-Wk</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 leading-tight mt-0.5">STEM Curriculum Built</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. EXPERIENCE & IMPACT TIMELINE -->
+    <section id="experience" class="scroll-mt-24 space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Career Track</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Experience &amp; Impact Timeline</h2>
+        </div>
+        <p class="text-sm text-slate-500 dark:text-slate-400">Technical facilitation, software quality assurance &amp; digital training</p>
+      </div>
+
+      <div class="relative border-l-2 border-emerald-500/30 ml-3 sm:ml-4 space-y-8 pl-6 sm:pl-8">
+        
+        <!-- Role 1 -->
+        <div class="relative group">
+          <span class="absolute -left-[33px] sm:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-slate-50 dark:ring-brand-slateDark"></span>
+          <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:border-emerald-500/40 transition-all print-clean">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Robotics Facilitator &amp; STEM Educator</h3>
+                <p class="text-sm font-medium text-emerald-600 dark:text-emerald-400">Coderina Edtech Foundation • Abuja, Nigeria</p>
+              </div>
+              <span class="inline-flex items-center self-start sm:self-center px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+                April 1, 2026 – Present
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 list-disc list-inside marker:text-emerald-500">
+              <li>Facilitate hands-on educational robotics and block/text programming sessions using <strong>LEGO Education SPIKE Essential &amp; SPIKE Prime</strong>.</li>
+              <li>Authored a comprehensive <strong>8-week STEM &amp; Robotics Curriculum Handout</strong> (November 2026) translating mechanical assembly and coding logic into progressive learner modules.</li>
+              <li>Coordinate logistics, student onboarding, and operations for the <strong>Coderina University Challenge (COUCH) 2026</strong>.</li>
+              <li>Led live robotics workshops at a July 2026 Java boot camp and conducted interactive school outreach demonstrations across Abuja (including Beautiful Beginning Academy).</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Role 2 -->
+        <div class="relative group">
+          <span class="absolute -left-[33px] sm:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-sky-500 ring-4 ring-slate-50 dark:ring-brand-slateDark"></span>
+          <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:border-sky-500/40 transition-all print-clean">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Freelance AI Evaluator, Data Annotator &amp; Software QA Tester</h3>
+                <p class="text-sm font-medium text-sky-600 dark:text-sky-400">Remote • Multi-Platform</p>
+              </div>
+              <span class="inline-flex items-center self-start sm:self-center px-3 py-1 rounded-full text-xs font-mono font-medium bg-sky-500/10 text-sky-700 dark:text-sky-300 border border-sky-500/20">
+                2025 – 2026
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 list-disc list-inside marker:text-sky-500">
+              <li>Annotated and validated <strong>3,000+ structured data points</strong> while maintaining a <strong>98% quality accuracy score</strong> against strict rubric guidelines.</li>
+              <li>Evaluated <strong>200+ generative AI outputs</strong> across 3 evaluation platforms for factual accuracy, instruction adherence, and safety alignment.</li>
+              <li>Executed exploratory and functional software testing on <strong>TestIO</strong>, uncovering and documenting <strong>13+ reproducible bugs</strong> in a single test cycle.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Role 3 -->
+        <div class="relative group">
+          <span class="absolute -left-[33px] sm:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-teal-500 ring-4 ring-slate-50 dark:ring-brand-slateDark"></span>
+          <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:border-teal-500/40 transition-all print-clean">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Computer Training Specialist (Intern)</h3>
+                <p class="text-sm font-medium text-teal-600 dark:text-teal-400">Bizmarrow Computer Training Center • Kubwa, Abuja</p>
+              </div>
+              <span class="inline-flex items-center self-start sm:self-center px-3 py-1 rounded-full text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                Oct 2014 – Jan 2015
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 list-disc list-inside marker:text-teal-500">
+              <li>Delivered practical, beginner-friendly training in office productivity suites, file management, and core computer operations.</li>
+              <li>Provided one-on-one learner troubleshooting and guided software exercises to build digital confidence.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Role 4 -->
+        <div class="relative group">
+          <span class="absolute -left-[33px] sm:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-slate-50 dark:ring-brand-slateDark"></span>
+          <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-5 shadow-sm print-clean">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white">National Youth Service Corps (NYSC) Alumni</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Completed national service with educational instruction and community development contributions.</p>
+              </div>
+              <span class="inline-flex items-center self-start sm:self-center px-3 py-1 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                Completed
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. FEATURED PROJECTS (FILTERABLE + INTERACTIVE MODAL) -->
+    <section id="projects" class="scroll-mt-24 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div>
+          <span class="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Selected Work</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Featured Projects</h2>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div id="project-filters" class="flex flex-wrap gap-2 no-print">
+          <button data-filter="all" class="filter-btn active px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition-all">
+            All (5)
+          </button>
+          <button data-filter="ai" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-emerald-500/40 transition-all">
+            AI &amp; Python
+          </button>
+          <button data-filter="web" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-emerald-500/40 transition-all">
+            Web Development
+          </button>
+          <button data-filter="edtech" class="filter-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-emerald-500/40 transition-all">
+            EdTech &amp; Curriculum
+          </button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Cards injected dynamically by JS for clean modal inspection & filtering -->
+      </div>
+    </section>
+
+    <!-- 4. SKILLS & TECHNICAL STACK -->
+    <section id="skills" class="scroll-mt-24 space-y-8">
+      <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+        <span class="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Capabilities</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Skills &amp; Technical Stack</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Skill Group 1 -->
+        <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 space-y-4 print-clean">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+              <i class="fa-solid fa-chalkboard-user text-lg"></i>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white">Technical Training &amp; Instructional Design</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Curriculum Development</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">LMS &amp; Software Onboarding</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Technical Facilitation</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">LEGO Education SPIKE Prime &amp; Essential</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Workshop Delivery</span>
+          </div>
+        </div>
+
+        <!-- Skill Group 2 -->
+        <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 space-y-4 print-clean">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center">
+              <i class="fa-solid fa-laptop-code text-lg"></i>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white">Software &amp; AI Development</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Python (pandas, scikit-learn, Streamlit)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Java (OOP)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">HTML5</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">CSS3</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">JavaScript</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Git &amp; GitHub</span>
+          </div>
+        </div>
+
+        <!-- Skill Group 3 -->
+        <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 space-y-4 print-clean">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+              <i class="fa-solid fa-bug-slash text-lg"></i>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white">Quality Assurance &amp; Data Operations</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">AI Output Evaluation</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Data Annotation (98% Accuracy)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Exploratory &amp; Functional Bug Testing (TestIO)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Technical Documentation</span>
+          </div>
+        </div>
+
+        <!-- Skill Group 4 -->
+        <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 space-y-4 print-clean">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+              <i class="fa-solid fa-toolbox text-lg"></i>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white">Tools &amp; Platforms</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">PyCharm</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">VS Code</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Microsoft Office (Word, Excel, PowerPoint)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Google Workspace (Docs, Sheets)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700">Linux Fundamentals</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. EDUCATION & CERTIFICATIONS -->
+    <section id="education" class="scroll-mt-24 space-y-8">
+      <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+        <span class="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Academic &amp; Credentials</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1">Education &amp; Certifications</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Academic Degrees (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 space-y-2 print-clean">
+            <div class="inline-flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Graduated 2023</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">B.Sc. (Ed.) in Computer Science Education</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300">Michael Okpara University of Agriculture, Umudike</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 pt-1">
+              Combined core computer science coursework (programming, algorithms, systems analysis) with instructional methodology and educational assessment.
+            </p>
+          </div>
+
+          <div class="rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 space-y-2 print-clean">
+            <div class="inline-flex items-center gap-2 text-xs font-mono text-sky-600 dark:text-sky-400">
+              <i class="fa-solid fa-award"></i>
+              <span>Technical Diploma</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Diploma in Computer and Office Management System</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300">Bizmarrow Computer Training Center, Abuja</p>
+          </div>
+        </div>
+
+        <!-- Professional Certifications (7 cols) -->
+        <div class="lg:col-span-7 rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 space-y-4 print-clean">
+          <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-certificate text-emerald-500"></i>
+            <span>Verified Certifications &amp; Technical Coursework</span>
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-800">
+              <p class="text-sm font-semibold text-slate-900 dark:text-white">Java Programming I &amp; II</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Aptech Computer Education</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-800">
+              <p class="text-sm font-semibold text-slate-900 dark:text-white">Basic Data Literacy</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Coursera &amp; Technical University of Denmark (DTU)</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-800">
+              <p class="text-sm font-semibold text-slate-900 dark:text-white">Generative AI, AI for All &amp; Responsible AI</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">MTN Skills Academy &amp; Microsoft Learn</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-800">
+              <p class="text-sm font-semibold text-slate-900 dark:text-white">Copilot Productivity &amp; Internet Search</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">MTN Skills Academy &amp; Microsoft Learn</p>
+            </div>
+
+            <div class="sm:col-span-2 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/70 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <p class="text-sm font-semibold text-slate-900 dark:text-white">Cybersecurity &amp; TVET Electrical Installation and Maintenance Works</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Technical &amp; Vocational Education Training (2026 Coursework)</p>
+              </div>
+              <span class="self-start sm:self-center px-2.5 py-1 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. INTERACTIVE CONTACT & QUICK-SHARE FOOTER -->
+    <section id="contact" class="scroll-mt-24">
+      <div class="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950 text-white p-8 sm:p-10 border border-slate-800 shadow-2xl space-y-8">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-2xl">
+            <span class="inline-block text-xs font-mono uppercase tracking-wider text-emerald-400">Connect &amp; Share</span>
+            <h2 class="text-2xl sm:text-3xl font-bold">Ready to collaborate on EdTech, LMS Training, or Software Projects</h2>
+            <p class="text-sm sm:text-base text-slate-300">
+              Based in Abuja, Nigeria and open to contract or full-time opportunities in LMS software training, technical facilitation, QA testing, and Python/web development.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-3 no-print">
+            <button onclick="window.print()" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/20 transition-all">
+              <i class="fa-solid fa-print"></i>
+              <span>Download / Print Resume View</span>
+            </button>
+
+            <button onclick="copyText('https://jhonniee.github.io', 'Portfolio URL (https://jhonniee.github.io) copied!')" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-white/10 hover:bg-white/15 text-white border border-white/15 transition-all">
+              <i class="fa-solid fa-link text-emerald-400"></i>
+              <span>Copy Portfolio URL</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- One-Click Copyable Links Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 border-t border-white/10">
+          <button onclick="copyText('johnobichukwu19@gmail.com', 'Email copied!')" class="flex items-center justify-between p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left transition-colors group">
+            <div class="truncate pr-2">
+              <div class="text-[11px] font-mono text-slate-400">EMAIL</div>
+              <div class="text-xs sm:text-sm font-medium truncate text-slate-100">johnobichukwu19@gmail.com</div>
+            </div>
+            <i class="fa-regular fa-copy text-slate-400 group-hover:text-emerald-400"></i>
+          </button>
+
+          <button onclick="copyText('+234 901 509 2514', 'Phone copied!')" class="flex items-center justify-between p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left transition-colors group">
+            <div>
+              <div class="text-[11px] font-mono text-slate-400">PHONE / WHATSAPP</div>
+              <div class="text-xs sm:text-sm font-medium text-slate-100">+234 901 509 2514</div>
+            </div>
+            <i class="fa-regular fa-copy text-slate-400 group-hover:text-emerald-400"></i>
+          </button>
+
+          <button onclick="copyText('https://github.com/Jhonniee', 'GitHub URL copied!')" class="flex items-center justify-between p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left transition-colors group">
+            <div class="truncate pr-2">
+              <div class="text-[11px] font-mono text-slate-400">GITHUB</div>
+              <div class="text-xs sm:text-sm font-medium truncate text-slate-100">github.com/Jhonniee</div>
+            </div>
+            <i class="fa-regular fa-copy text-slate-400 group-hover:text-emerald-400"></i>
+          </button>
+
+          <button onclick="copyText('https://www.linkedin.com/in/john-aguiyi-72897a240', 'LinkedIn URL copied!')" class="flex items-center justify-between p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left transition-colors group">
+            <div class="truncate pr-2">
+              <div class="text-[11px] font-mono text-slate-400">LINKEDIN</div>
+              <div class="text-xs sm:text-sm font-medium truncate text-slate-100">in/john-aguiyi-72897a240</div>
+            </div>
+            <i class="fa-regular fa-copy text-slate-400 group-hover:text-emerald-400"></i>
+          </button>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400 pt-2">
+          <p>&copy; 2026 Aguiyi John Obichukwu. Built for GitHub Pages deployment (<span class="font-mono text-emerald-400">jhonniee.github.io</span>).</p>
+          <p class="font-mono">Last Updated: November 2026</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Project Details Modal -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm no-print">
+    <div class="relative w-full max-w-xl rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-700 p-6 sm:p-8 shadow-2xl space-y-5">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <span id="modal-category" class="inline-block px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 mb-2"></span>
+          <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white"></h3>
+        </div>
+        <button id="close-modal" aria-label="Close modal" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p id="modal-description" class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed"></p>
+
+      <div>
+        <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Key Highlights &amp; Architecture</h4>
+        <ul id="modal-highlights" class="space-y-1.5 text-sm text-slate-700 dark:text-slate-200 list-disc list-inside marker:text-emerald-500"></ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Technologies &amp; Tools</h4>
+        <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div id="modal-actions" class="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-end gap-3"></div>
+    </div>
+  </div>
+
+  <script>
+    // Project Data Repository
+    const projects = [
+      {
+        id: 'leadcraft-ai',
+        title: 'LeadCraft AI',
+        category: 'ai',
+        categoryLabel: 'AI & Python',
+        icon: 'fa-solid fa-wand-magic-sparkles',
+        summary: 'AI-powered proposal-generation web application built with Python and Streamlit, deployed on Streamlit Community Cloud.',
+        details: 'Designed to streamline client outreach and technical proposal creation. Users input project requirements and target context to generate structured, tailored business proposals rapidly through an intuitive Streamlit web interface.',
+        highlights: [
+          'Built end-to-end Python workflow with clean interactive Streamlit UI controls.',
+          'Configured environment secrets and cloud deployment on Streamlit Community Cloud.',
+          'Version-controlled and documented on GitHub for reproducible setup.'
+        ],
+        tags: ['Python', 'Streamlit', 'Generative AI', 'GitHub'],
+        githubUrl: 'https://github.com/Jhonniee/LeadCraftAI'
+      },
+      {
+        id: 'netflix-recommender',
+        title: 'Content-Based Netflix Recommendation Engine & Rating Classifier',
+        category: 'ai',
+        categoryLabel: 'AI & Python',
+        icon: 'fa-solid fa-film',
+        summary: 'Machine learning recommendation and content rating classification pipeline engineered in Python using pandas and scikit-learn.',
+        details: 'Processes catalog metadata—including genres, descriptions, cast, and release attributes—using TF-IDF vectorization and cosine similarity to recommend similar titles, paired with a supervised classifier for maturity rating prediction.',
+        highlights: [
+          'Cleaned and engineered text features across catalog records using pandas.',
+          'Implemented cosine similarity matrix for fast content-based recommendations.',
+          'Trained and evaluated classification models in PyCharm with scikit-learn.'
+        ],
+        tags: ['Python', 'pandas', 'scikit-learn', 'PyCharm', 'Machine Learning'],
+        githubUrl: 'https://github.com/Jhonniee/NetflixRecommender'
+      },
+      {
+        id: 'fixtogether',
+        title: 'FixTogether',
+        category: 'web',
+        categoryLabel: 'Web Development',
+        icon: 'fa-solid fa-screwdriver-wrench',
+        summary: 'Independent full-featured web application built from the ground up through hands-on frontend architecture and interactive DOM engineering.',
+        details: 'Developed entirely with semantic HTML5, responsive CSS3, and vanilla JavaScript to practice clean UI structuring, client-side state handling, and user-centered service workflows without heavy external frameworks.',
+        highlights: [
+          'Architected responsive layouts across mobile, tablet, and desktop viewports.',
+          'Implemented interactive client-side logic and form workflows in JavaScript.',
+          'Focused on accessible navigation and crisp visual hierarchy.'
+        ],
+        tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI'],
+        githubUrl: 'https://github.com/Jhonniee'
+      },
+      {
+        id: 'localcraft',
+        title: 'LocalCraft',
+        category: 'web',
+        categoryLabel: 'Web Development',
+        icon: 'fa-solid fa-store',
+        summary: 'Web and software development project hosted on GitHub showcasing modular code organization and local service discovery concepts.',
+        details: 'Repository dedicated to building clean, maintainable web software components tailored for local community craft and service visibility.',
+        highlights: [
+          'Structured repository with clear commit history and modular project files.',
+          'Designed with practical local utility and clean user navigation in mind.'
+        ],
+        tags: ['Web Development', 'Git', 'GitHub'],
+        githubUrl: 'https://github.com/Jhonniee/LocalCraft'
+      },
+      {
+        id: 'stem-curriculum',
+        title: '8-Week STEM & Robotics Curriculum Handout',
+        category: 'edtech',
+        categoryLabel: 'EdTech & Curriculum',
+        icon: 'fa-solid fa-robot',
+        summary: 'Progressive beginner-to-intermediate curriculum designed in November 2026 for LEGO Education SPIKE Essential & SPIKE Prime.',
+        details: 'Created to guide learners and fellow facilitators through an 8-week structured journey covering mechanical engineering principles, sensor integration, and visual/Python robotics programming.',
+        highlights: [
+          'Structured into 8 weekly modules with clear learning objectives and hands-on builds.',
+          'Covers both LEGO Education SPIKE Essential (foundational) and SPIKE Prime (intermediate).',
+          'Directly supports classroom facilitation, boot camps, and COUCH 2026 preparation.'
+        ],
+        tags: ['Instructional Design', 'LEGO SPIKE Prime', 'LEGO SPIKE Essential', 'STEM Education'],
+        githubUrl: null
+      }
+    ];
+
+    // Render Project Cards
+    const projectsGrid = document.getElementById('projects-grid');
+
+    function renderProjects(filter = 'all') {
+      projectsGrid.innerHTML = '';
+      const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+
+      filtered.forEach(project => {
+        const card = document.createElement('article');
+        card.className = 'group rounded-2xl bg-white dark:bg-brand-cardDark border border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between shadow-sm hover:shadow-xl hover:border-emerald-500/40 transition-all duration-300 print-clean';
+
+        const githubButton = project.githubUrl
+          ? `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+               <i class="fa-brands fa-github"></i>
+               <span>GitHub Repo</span>
+             </a>`
+          : `<span class="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400">
+               <i class="fa-solid fa-book-open"></i>
+               <span>Instructional Handout</span>
+             </span>`;
+
+        card.innerHTML = `
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+                ${project.categoryLabel}
+              </span>
+              <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <i class="${project.icon}"></i>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                ${project.title}
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                ${project.summary}
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              ${project.tags.map(tag => `<span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-slate-100 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300">${tag}</span>`).join('')}
+            </div>
+          </div>
+
+          <div class="pt-5 mt-5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2 no-print">
+            ${githubButton}
+            <button onclick="openProjectModal('${project.id}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600/10 hover:bg-emerald-600 text-emerald-700 dark:text-emerald-300 hover:text-white transition-all">
+              <span>Details</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </button>
+          </div>
+        `;
+        projectsGrid.appendChild(card);
+      });
+    }
+
+    // Filter Buttons Logic
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
+          b.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+        });
+        btn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+        btn.classList.add('bg-emerald-600', 'text-white', 'shadow-sm');
+        renderProjects(btn.dataset.filter);
+      });
+    });
+
+    // Modal Logic
+    const modal = document.getElementById('project-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+
+    function openProjectModal(projectId) {
+      const project = projects.find(p => p.id === projectId);
+      if (!project) return;
+
+      document.getElementById('modal-category').textContent = project.categoryLabel;
+      document.getElementById('modal-title').textContent = project.title;
+      document.getElementById('modal-description').textContent = project.details;
+
+      const highlightsEl = document.getElementById('modal-highlights');
+      highlightsEl.innerHTML = project.highlights.map(item => `<li>${item}</li>`).join('');
+
+      const tagsEl = document.getElementById('modal-tags');
+      tagsEl.innerHTML = project.tags.map(tag => `<span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">${tag}</span>`).join('');
+
+      const actionsEl = document.getElementById('modal-actions');
+      actionsEl.innerHTML = project.githubUrl
+        ? `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-colors">
+             <i class="fa-brands fa-github"></i>
+             <span>Open GitHub Repository</span>
+           </a>`
+        : `<span class="text-xs font-mono text-slate-400">Developed for Coderina Edtech Foundation (Nov 2026)</span>`;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+    });
+
+    // Clipboard Copy Helper (Uses execCommand fallback for iframe compatibility)
+    let toastTimeout;
+    function copyText(text, message) {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = text;
+      tempInput.style.position = 'fixed';
+      tempInput.style.opacity = '0';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        showToast(message || 'Copied to clipboard!');
+      } catch (err) {
+        showToast('Unable to copy automatically.');
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2800);
+    }
+
+    // Dark / Light Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const htmlEl = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+      htmlEl.classList.toggle('dark');
+      const isDark = htmlEl.classList.contains('dark');
+      themeIcon.className = isDark ? 'fa-solid fa-sun text-sm' : 'fa-solid fa-moon text-sm';
+    });
+
+    // Mobile Navigation Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Initialize Projects on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderProjects('all');
+    });
+  </script>
+</body>
+</html>
